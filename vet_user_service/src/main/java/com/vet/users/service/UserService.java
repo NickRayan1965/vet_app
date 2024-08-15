@@ -45,7 +45,7 @@ public class UserService implements IUserService{
     @Override
     public Flux<UserDto> findAll() {
         return userRepository
-            .findAll()
+            .findAllEnabled()
             .map(userMapper::toDto);
     }
 
