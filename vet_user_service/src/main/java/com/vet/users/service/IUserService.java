@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 
 public interface IUserService {
      Mono<UserDto> findOneById(Long id);
+     Mono<User> findOneByUsername(String username);
      Mono<UserDto> create(CreateUserDto createUserDto);
      Mono<UserDto> update(Long id, UpdateUserDto updateUserDto);
      Flux<UserDto> findAll();

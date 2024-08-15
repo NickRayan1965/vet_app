@@ -81,5 +81,9 @@ public class UserService implements IUserService{
         return Mono.just(dto);
     }
 
+    @Override
+    public Mono<User> findOneByUsername(String username) {
+        return userRepository.findOneByUsername(username);
+    }
 
 }
