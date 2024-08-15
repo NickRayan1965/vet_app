@@ -8,6 +8,7 @@ import com.vet.users.dtos.UpdateUserDto;
 import com.vet.users.dtos.UserDto;
 import com.vet.users.entities.User;
 import com.vet.users.entities.mappers.IUserMapper;
+import com.vet.users.models.NotFoundException;
 import com.vet.users.repositories.IUserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,7 @@ public class UserService implements IUserService{
         return userRepository
             .findById(id)
             .map(userMapper::toDto)
-            .switchIfEmpty(Mono.error(new RuntimeException("User not found")))
+            .switchIfEmpty(Mono.error(new NotFoundException("User not found")))
             ;
     }
 
