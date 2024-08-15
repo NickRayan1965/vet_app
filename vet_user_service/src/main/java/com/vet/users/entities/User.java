@@ -1,4 +1,4 @@
-package com.vet.users.entity;
+package com.vet.users.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
