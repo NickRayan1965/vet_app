@@ -36,6 +36,7 @@ public interface IUserMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "enabled", ignore = true)
+    @Mapping(target = "password", ignore = true)
     void mergeToEntity(UpdateUserDto dto, @MappingTarget User entity);
 
     void setEntityOnDto(User entity, @MappingTarget UserDto dto);
