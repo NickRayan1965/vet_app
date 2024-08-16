@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vet.users.dtos.CreateUserDto;
+import com.vet.users.dtos.LoginDto;
+import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
 import com.vet.users.dtos.UserDto;
 import com.vet.users.service.IUserService;
@@ -30,6 +32,11 @@ public class UserController {
     @PostMapping
     public Mono<UserDto> create(@RequestBody CreateUserDto createUserDto) {
         return userService.create(createUserDto);
+    }
+
+    @PostMapping("/login")
+    public Mono<LoginResponseDto> login(@RequestBody LoginDto loginDto) {
+        return userService.login(loginDto);
     }
 
     @GetMapping
