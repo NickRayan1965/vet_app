@@ -1,15 +1,20 @@
 package com.vet.users.service;
 
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vet.users.dtos.CreateUserDto;
+import com.vet.users.dtos.LoginDto;
+import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
 import com.vet.users.dtos.UserDto;
 import com.vet.users.entities.User;
 import com.vet.users.entities.mappers.IUserMapper;
 import com.vet.users.models.NotFoundException;
 import com.vet.users.repositories.IUserRepository;
+import com.vet.users.security.jwt.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -21,6 +26,7 @@ public class UserService implements IUserService{
     private final IUserRepository userRepository;
     private final IUserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
     @Override
     public Mono<UserDto> create(CreateUserDto createUserDto) {
@@ -85,6 +91,24 @@ public class UserService implements IUserService{
     @Override
     public Mono<User> findOneByUsername(String username) {
         return userRepository.findOneByUsername(username);
+    }
+
+    @Override
+    public Mono<LoginResponseDto> login(LoginDto loginDto) {
+        return userRepository
+            .findOneByUsername(loginDto.getUsername())
+            .switchIfEmpty(Mono.error(new BadCredentialsException("Invalid username or password")))
+            .filter(user -> user.getEnabled())
+            .switchIfEmpty(Mono.error(new DisabledException("User is disabled talk to admin to enable your account")))
+            .filter(user -> passwordEncoder.matches(loginDto.getPassword(), user.getPassword()))
+            .map(user -> {
+                return LoginResponseDto.builder()
+                    .user(userMapper.toDto(user))
+                    .jwt(jwtProvider.generateToken(user))
+                    .build();
+            })
+            .switchIfEmpty(Mono.error(new BadCredentialsException("Invalid username or password")))
+            ;
     }
 
 }

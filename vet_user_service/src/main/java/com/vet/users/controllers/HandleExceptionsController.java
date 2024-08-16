@@ -2,6 +2,8 @@ package com.vet.users.controllers;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -45,4 +47,9 @@ public class HandleExceptionsController {
     return Mono.just(Error.fromRuntimeException(e, HttpStatus.NOT_FOUND));
   }
 
+  @ExceptionHandler({BadCredentialsException.class, DisabledException.class})
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public Mono<Error> handleBadCredentialsException(RuntimeException e) {
+    return Mono.just(Error.fromRuntimeException(e, HttpStatus.UNAUTHORIZED));
+  }
 }
