@@ -32,16 +32,19 @@ public interface IUserMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "enabled", constant = "true")
+    @Mapping(target = "authorities", ignore = true)
     void mergeToEntity(CreateUserDto dto, @MappingTarget User entity);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "enabled", ignore = true)
     @Mapping(target = "password", ignore = true)
+    @Mapping(target = "authorities", ignore = true)
     void mergeToEntity(UpdateUserDto dto, @MappingTarget User entity);
 
     void setEntityOnDto(User entity, @MappingTarget UserDto dto);
 
     @Mapping(target = "password", ignore = true)
+    @Mapping(target = "authorities", ignore = true)
     void setDtoOnEntity(UserDto dto, @MappingTarget User entity);
   
 }
