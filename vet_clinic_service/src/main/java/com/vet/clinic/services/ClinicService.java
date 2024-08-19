@@ -2,7 +2,7 @@ package com.vet.clinic.services;
 
 import org.springframework.stereotype.Service;
 
-import com.vet.clinic.dtos.ClinicDto;
+import com.vet.commons.dtos.ClinicDto;
 import com.vet.clinic.dtos.CreateClinicDto;
 import com.vet.clinic.dtos.UpdateClinicDto;
 import com.vet.clinic.models.mappers.IClinicMapper;

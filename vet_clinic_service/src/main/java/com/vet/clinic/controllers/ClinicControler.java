@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vet.clinic.dtos.ClinicDto;
 import com.vet.clinic.dtos.CreateClinicDto;
 import com.vet.clinic.dtos.UpdateClinicDto;
 import com.vet.clinic.services.IClinicService;
+import com.vet.commons.dtos.ClinicDto;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;

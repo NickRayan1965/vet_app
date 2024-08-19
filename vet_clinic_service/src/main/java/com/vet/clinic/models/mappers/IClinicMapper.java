@@ -4,9 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import com.vet.clinic.dtos.ClinicDto;
 import com.vet.clinic.dtos.CreateClinicDto;
 import com.vet.clinic.dtos.UpdateClinicDto;
+import com.vet.commons.dtos.ClinicDto;
 import com.vet.commons.entities.mongo.Clinic;
 
 @Mapper(componentModel = "spring")
