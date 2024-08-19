@@ -13,6 +13,7 @@
 		<module>vet_perfil_service</module>
 		<module>vet_clinic_service</module>
 		<module>vet_commons</module>
+		<module>vet_eureka_server</module>
 	</modules>
 	<groupId>com.vet</groupId>
 	<artifactId>vet_application</artifactId>
@@ -126,5 +127,15 @@
 	</build>
 
 
-	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2023.0.3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
