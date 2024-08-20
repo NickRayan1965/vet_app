@@ -1,4 +1,4 @@
-package com.vet.commons.dtos;
+package com.vet.commons.dtos.req;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,25 +9,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClinicDto {
+public class CreateVeterinarianPerfilDto {
+    private Long userId;
     
-    private String id;
-    
-    private String name;
+    private String licenceNumber;
 
     private String address;
 
     private String city;
 
     private String state;
-
-    private String country;
-
-    private String postalCode;
-
-    private String phoneNumber;
     
-    private String email;
+    private String workHours;
 
-    private Boolean enabled;
+    private String clinicId; 
 }

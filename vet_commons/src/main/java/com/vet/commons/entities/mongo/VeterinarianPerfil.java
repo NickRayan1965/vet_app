@@ -32,7 +32,7 @@ public class VeterinarianPerfil {
     
     private String workHours;
 
-    private String clinicId;
+    private Boolean enabled;
 
     @DocumentReference
     private Clinic clinic;
