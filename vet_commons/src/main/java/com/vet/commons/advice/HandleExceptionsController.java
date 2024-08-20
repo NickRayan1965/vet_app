@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -16,6 +16,7 @@ import org.springframework.web.server.ServerWebInputException;
 import com.vet.commons.exceptions.Exception;
 import com.vet.commons.exceptions.MongoDuplicateKeyException;
 import com.vet.commons.exceptions.NotFoundException;
+import com.vet.commons.exceptions.ThrowableRestExeption;
 
 import reactor.core.publisher.Mono;
 
@@ -39,6 +40,12 @@ public class HandleExceptionsController {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public Mono<Exception> handleNoResourceFoundException(NoResourceFoundException e) {
     return Mono.just(Exception.fromRuntimeException(e, HttpStatus.NOT_FOUND));
+  }
+
+  @ExceptionHandler(ThrowableRestExeption.class)
+  public Mono<ResponseEntity<Exception>> handleThrowableException(ThrowableRestExeption e) {
+    Exception exceptionBody = e.getExceptionBody();
+    return Mono.just(ResponseEntity.status(exceptionBody.getStatus()).body(exceptionBody));
   }
 
   @ExceptionHandler({DuplicateKeyException.class, MongoDuplicateKeyException.class})

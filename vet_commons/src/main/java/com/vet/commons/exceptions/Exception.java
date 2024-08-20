@@ -4,12 +4,11 @@ import java.util.Date;
 import org.springframework.http.HttpStatus;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
 @Builder
+@Data
 public class Exception {
   public static Exception fromRuntimeException(RuntimeException e) {
     return Exception.fromRuntimeException(e, HttpStatus.INTERNAL_SERVER_ERROR);
