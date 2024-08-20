@@ -1,8 +1,8 @@
 package com.vet.clinic.services;
 
-import com.vet.clinic.dtos.CreateClinicDto;
-import com.vet.clinic.dtos.UpdateClinicDto;
-import com.vet.commons.dtos.ClinicDto;
+import com.vet.commons.dtos.req.CreateClinicDto;
+import com.vet.commons.dtos.req.UpdateClinicDto;
+import com.vet.commons.dtos.res.ClinicDto;
 import com.vet.commons.entities.mongo.Clinic;
 
 import reactor.core.publisher.Flux;
