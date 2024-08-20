@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.vet.commons.dtos.ClinicDto;
+import com.vet.commons.dtos.res.ClinicDto;
 import com.vet.commons.util.WebClientResponseHandler;
 
 import lombok.RequiredArgsConstructor;

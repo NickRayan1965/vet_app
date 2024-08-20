@@ -1,6 +1,6 @@
 package com.vet.perfils.clients;
 
-import com.vet.commons.dtos.ClinicDto;
+import com.vet.commons.dtos.res.ClinicDto;
 
 import reactor.core.publisher.Mono;
 
