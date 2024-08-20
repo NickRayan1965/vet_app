@@ -1,4 +1,6 @@
 package com.vet.users.dtos;
+import com.vet.commons.dtos.res.UserDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

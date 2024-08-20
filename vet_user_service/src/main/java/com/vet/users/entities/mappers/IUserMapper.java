@@ -4,9 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import com.vet.commons.dtos.res.UserDto;
 import com.vet.users.dtos.CreateUserDto;
 import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.dtos.UserDto;
 import com.vet.users.entities.User;
 
 @Mapper(componentModel = "spring")

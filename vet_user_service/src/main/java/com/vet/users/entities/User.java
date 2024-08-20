@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vet.commons.entities.pg.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

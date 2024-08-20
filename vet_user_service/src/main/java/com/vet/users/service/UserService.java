@@ -5,14 +5,14 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.vet.commons.dtos.res.UserDto;
+import com.vet.commons.exceptions.NotFoundException;
 import com.vet.users.dtos.CreateUserDto;
 import com.vet.users.dtos.LoginDto;
 import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.dtos.UserDto;
 import com.vet.users.entities.User;
 import com.vet.users.entities.mappers.IUserMapper;
-import com.vet.users.models.NotFoundException;
 import com.vet.users.repositories.IUserRepository;
 import com.vet.users.security.jwt.JwtProvider;
 

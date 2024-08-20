@@ -1,6 +1,6 @@
 package com.vet.users.dtos;
 
-import com.vet.users.entities.Role;
+import com.vet.commons.entities.pg.Role;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

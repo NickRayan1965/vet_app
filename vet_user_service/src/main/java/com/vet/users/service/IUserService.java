@@ -1,10 +1,10 @@
 package com.vet.users.service;
 
+import com.vet.commons.dtos.res.UserDto;
 import com.vet.users.dtos.CreateUserDto;
 import com.vet.users.dtos.LoginDto;
 import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.dtos.UserDto;
 import com.vet.users.entities.User;
 
 import reactor.core.publisher.Flux;

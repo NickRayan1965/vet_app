@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vet.commons.dtos.res.UserDto;
 import com.vet.users.dtos.CreateUserDto;
 import com.vet.users.dtos.LoginDto;
 import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.dtos.UserDto;
 import com.vet.users.service.IUserService;
 
 import lombok.RequiredArgsConstructor;
