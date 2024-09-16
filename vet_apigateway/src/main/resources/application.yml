@@ -21,9 +21,15 @@ spring:
       - id: VET-USER-SERVICE
         uri: lb://VET-USER-SERVICE
         predicates:
-          - Path=/users/**
+          - Path=/api/users/**
         filters:
-          - StripPrefix=2
+          - StripPrefix=1
+      - id: VET-AUTH-SERVICE
+        uri: lb://VET-AUTH-SERVICE
+        predicates:
+          - Path=/api/auth/**
+        filters:
+          - StripPrefix=1
 #eureka client
 eureka:
   client:
@@ -35,4 +41,11 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${random.uuid}
     hostname: localhost
-  
+management:
+    endpoint:
+        health:
+            show-details: always
+    endpoints:
+        web:
+            exposure:
+                include: info,health,metrics
