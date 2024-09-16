@@ -7,6 +7,7 @@ import com.vet.commons.dtos.res.ClinicDto;
 import com.vet.commons.dtos.res.VeterinarianPerfilDto;
 import com.vet.commons.entities.mongo.Clinic;
 import com.vet.commons.entities.mongo.VeterinarianPerfil;
+import com.vet.commons.exceptions.NotFoundException;
 import com.vet.commons.mappers.IClinicMapper;
 import com.vet.commons.mappers.IVeterianarianPerfilMapper;
 import com.vet.perfils.clients.IClinicRestClient;
@@ -37,14 +38,12 @@ public class VeterinarianPerfilService implements IVeterinarianPerfilService {
 
     @Override
     public Mono<VeterinarianPerfilDto> findOneById(String id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findOneById'");
+        return veterianarianPerfilRepository.findById(id).map(veterianarianPerfilMapper::toDto).switchIfEmpty(Mono.error(new NotFoundException("Veterinarian Perfil not found")));
     }
 
     @Override
     public Flux<VeterinarianPerfilDto> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return veterianarianPerfilRepository.findAll().map(veterianarianPerfilMapper::toDto);
     }
 
     @Override

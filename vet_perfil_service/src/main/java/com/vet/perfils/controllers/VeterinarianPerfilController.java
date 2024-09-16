@@ -11,11 +11,13 @@ import com.vet.commons.dtos.res.VeterinarianPerfilDto;
 import com.vet.perfils.service.IVeterinarianPerfilService;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/veterinarian-perfil")
+@RequestMapping("/perfil/veterinarian-perfil")
 @RequiredArgsConstructor
 public class VeterinarianPerfilController {
 
@@ -23,6 +25,16 @@ public class VeterinarianPerfilController {
     @PostMapping
     Mono<VeterinarianPerfilDto> create(@RequestBody CreateVeterinarianPerfilDto createVeterinarianPerfilDto) {
         return veterinarianPerfilService.create(createVeterinarianPerfilDto);
+    }
+    
+    @GetMapping()
+    public Flux<VeterinarianPerfilDto> findAll() {
+        return veterinarianPerfilService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Mono<VeterinarianPerfilDto> findOneById(@PathVariable String id) {
+        return veterinarianPerfilService.findOneById(id);
     }
     
 }
