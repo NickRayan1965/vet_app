@@ -5,15 +5,17 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.3</version>
 	</parent>
 	<modules>
 		<module>vet_user_service</module>
 		<module>vet_apigateway</module>
 		<module>vet_perfil_service</module>
 		<module>vet_clinic_service</module>
-		<module>vet_commons</module>
+		<!-- <module>vet_commons</module> -->
 		<module>vet_eureka_server</module>
+		<module>config_server</module>
+		<module>vet_auth_service</module>
 	</modules>
 	<groupId>com.vet</groupId>
 	<artifactId>vet_application</artifactId>
@@ -60,10 +62,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,13 +83,7 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
