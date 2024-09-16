@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vet.commons.dtos.res.UserDto;
 import com.vet.users.dtos.CreateUserDto;
-import com.vet.users.dtos.LoginDto;
-import com.vet.users.dtos.LoginResponseDto;
 import com.vet.users.dtos.UpdateUserDto;
+import com.vet.users.entities.User;
 import com.vet.users.service.IUserService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,20 +33,23 @@ public class UserController {
         return userService.create(createUserDto);
     }
 
-    @PostMapping("/login")
-    public Mono<LoginResponseDto> login(@RequestBody LoginDto loginDto) {
-        return userService.login(loginDto);
-    }
 
     @GetMapping
     public Flux<UserDto> findAll() {
         return userService.findAll();
     }
 
+    @GetMapping("/username/{username}")
+    public Mono<User> findOneByUsername(@PathVariable String username) {
+        return userService.findByUsername(username).cast(User.class);
+    }
+
     @GetMapping("/{id}")
     public Mono<UserDto> findOneId(@PathVariable Long id) {
         return userService.findOneById(id);
     }
+
+    
 
     @PutMapping("/{id}")
     public Mono<UserDto> update(@PathVariable Long id, @RequestBody UpdateUserDto updateUserDto) {

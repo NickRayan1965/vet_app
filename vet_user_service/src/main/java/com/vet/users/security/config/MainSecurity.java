@@ -15,7 +15,6 @@ public class MainSecurity {
     SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
             .csrf(csrfSpec -> csrfSpec.disable())
-            .authorizeExchange(authzE -> authzE.anyExchange().permitAll())
             .formLogin(formLoginSpec -> formLoginSpec.disable())
             .httpBasic(httpBasicSpec -> httpBasicSpec.disable())
             .logout(logoutSpec -> logoutSpec.disable())
