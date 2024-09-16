@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,18 +25,13 @@ import reactor.core.publisher.Mono;
 @RestControllerAdvice
 public class HandleExceptionsController {
 
-  @ExceptionHandler(RuntimeException.class)
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public Mono<Exception> handleException(RuntimeException e) {
-    System.out.println("toreto");
-    return Mono.just(Exception.fromRuntimeException(e));
-  }
+  
 
-  // @ExceptionHandler(UsernameNotFoundException.class)
-  // @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  // public Mono<Exception> handleUsernameNotFoundException(UsernameNotFoundException e) {
-  //   return Mono.just(Exception.fromRuntimeException(e, HttpStatus.UNAUTHORIZED));
-  // }
+  @ExceptionHandler({UsernameNotFoundException.class, BadCredentialsException.class})
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public Mono<Exception> handleUsernameNotFoundException(RuntimeException e) {
+    return Mono.just(Exception.fromRuntimeException(e, HttpStatus.UNAUTHORIZED));
+  }
 
   @ExceptionHandler(NoResourceFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -93,5 +90,10 @@ public class HandleExceptionsController {
             .error("ValidationException")
             .status(HttpStatus.BAD_REQUEST.value())
             .build());
+    }
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Mono<Exception> handleException(RuntimeException e) {
+      return Mono.just(Exception.fromRuntimeException(e));
     }
 }
