@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.reactive.resource.NoResourceFoundException;
+import org.springframework.web.server.MethodNotAllowedException;
 import org.springframework.web.server.ServerWebInputException;
 
 import com.vet.commons.exceptions.Exception;
@@ -24,6 +25,12 @@ import reactor.core.publisher.Mono;
 
 @RestControllerAdvice
 public class HandleExceptionsController {
+
+  @ExceptionHandler(MethodNotAllowedException.class)
+  @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+  public Mono<Exception> handleMethodNotAllowedEx(MethodNotAllowedException e) {
+    return Mono.just(Exception.fromRuntimeException(e, HttpStatus.METHOD_NOT_ALLOWED));
+  }
 
   
 
