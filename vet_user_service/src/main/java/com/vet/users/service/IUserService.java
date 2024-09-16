@@ -1,7 +1,6 @@
 package com.vet.users.service;
 
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.vet.commons.dtos.res.UserDto;
 import com.vet.users.dtos.CreateUserDto;
