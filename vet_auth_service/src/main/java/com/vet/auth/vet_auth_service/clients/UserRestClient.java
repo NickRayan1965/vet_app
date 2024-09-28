@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.vet.auth.vet_auth_service.entities.User;
+import com.vet.auth_common.entities.User;
 import com.vet.commons.util.WebClientResponseHandler;
 
 import reactor.core.publisher.Mono;

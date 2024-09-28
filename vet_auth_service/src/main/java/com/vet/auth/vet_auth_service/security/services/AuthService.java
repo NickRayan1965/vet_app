@@ -9,8 +9,8 @@ import com.vet.auth.vet_auth_service.clients.IUserRestClient;
 import com.vet.auth.vet_auth_service.dtos.LoginDto;
 import com.vet.auth.vet_auth_service.dtos.LoginResponseDto;
 import com.vet.auth.vet_auth_service.dtos.RefreshTokenDto;
-import com.vet.auth.vet_auth_service.mappers.IUserMapper;
 import com.vet.auth.vet_auth_service.security.jwt.JwtProvider;
+import com.vet.auth_common.mappers.IUserMapper;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
