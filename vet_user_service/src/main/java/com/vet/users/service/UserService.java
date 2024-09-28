@@ -5,22 +5,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.vet.auth_common.dtos.CreateUserDto;
+import com.vet.auth_common.dtos.UpdateUserDto;
+import com.vet.auth_common.entities.User;
+import com.vet.auth_common.mappers.IUserMapper;
+import com.vet.commons.dtos.req.FindUsersQueryDto;
+import com.vet.commons.dtos.res.FindAllResultDto;
 import com.vet.commons.dtos.res.UserDto;
 import com.vet.commons.exceptions.NotFoundException;
-import com.vet.users.dtos.CreateUserDto;
-import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.entities.User;
-import com.vet.users.entities.mappers.IUserMapper;
 import com.vet.users.repositories.IUserRepository;
-
+import com.vet.users.repositories.UserCustomRepository;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
     private final IUserRepository userRepository;
+    private final UserCustomRepository userCustomRepository;
     private final IUserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -56,10 +58,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Flux<UserDto> findAll() {
-        return userRepository
-            .findAllEnabled()
-            .map(userMapper::toDto);
+    public Mono<FindAllResultDto<UserDto>> findAll(FindUsersQueryDto queryDto) {
+        Integer page = queryDto.getPage();
+        Integer pageSize = queryDto.getPageSize();
+        return userCustomRepository.advancedPagedSearchAndCount(null, pageSize, (page - 1) * pageSize)
+            .map(result -> {
+                FindAllResultDto<UserDto> response = new FindAllResultDto<>();
+                response.setCount(result.getT1());
+                response.setData(result.getT2().stream().map(userMapper::toDto).toList());
+                return response;
+            })
+        ;
     }
 
     @Override

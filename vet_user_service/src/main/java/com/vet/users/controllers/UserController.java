@@ -6,18 +6,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vet.auth_common.dtos.CreateUserDto;
+import com.vet.auth_common.dtos.UpdateUserDto;
+import com.vet.auth_common.entities.User;
+import com.vet.commons.dtos.req.FindUsersQueryDto;
+import com.vet.commons.dtos.res.FindAllResultDto;
 import com.vet.commons.dtos.res.UserDto;
-import com.vet.users.dtos.CreateUserDto;
-import com.vet.users.dtos.UpdateUserDto;
-import com.vet.users.entities.User;
+
 import com.vet.users.service.IUserService;
 
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
@@ -35,8 +38,8 @@ public class UserController {
 
 
     @GetMapping
-    public Flux<UserDto> findAll() {
-        return userService.findAll();
+    public Mono<FindAllResultDto<UserDto>> findAll(@ModelAttribute FindUsersQueryDto queryDto) {
+        return userService.findAll(queryDto);
     }
 
     @GetMapping("/username/{username}")
